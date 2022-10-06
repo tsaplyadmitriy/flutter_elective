@@ -1,16 +1,33 @@
-# elective
+# ChuckJokes App
 
-A new Flutter project.
+## Overwiew
 
-## Getting Started
+This application provides infinite feed of Chuck Norris jokes. Swipe right to add joke to favourite list, which you can find by clicking on Star icon. 
 
-This project is a starting point for a Flutter application.
+Joke feed            |  Favourite jokes
+:-------------------------:|:-------------------------:
+![](https://i.postimg.cc/x1N4PVq5/Simulator-Screen-Shot-i-Phone-13-2022-10-06-at-19-35-48.png)  |  ![](https://i.postimg.cc/gJgsWgnr/Simulator-Screen-Shot-i-Phone-13-2022-10-06-at-19-36-06.png)
 
-A few resources to get you started if this is your first Flutter project:
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+
+## Usage
+
+- To use this application on your android app, download .apk file via [this link](https://drive.google.com/file/d/1La6smcm-GeYxRr4f3lfHkHpUdBdbFmUg/view?usp=sharing)
+
+- To use this application on your iOS app, you need to have Apple Developer account and access to TestFlight. Build and deploy your app to TestFlight via XCode.
+
+## Architecture
+
+- This project uses BloC architecture
+- The app has four layers: UI, Business logic, Repository and Network
+- API requests is done using Dio
+- Code generation is done using retrofit
+
+Repository is an absraction on data source for business logic module. It simulates pagination, as inital API does not have it. We load jokes with chunks of 20.
+
+Network layer is responsible to only represent data models and available API requests
+
+## Contact
+
+You can adress any question about this app to @dimtsaplia in telegram

@@ -5,7 +5,7 @@ import 'package:elective/network/joke_network.dart';
 
 class JokeRepository {
   final dio = Dio();
-  final int pagination = 6;
+  final int pagination = 20;
 
   RestClient? jokeNetwork;
 
@@ -23,13 +23,7 @@ class JokeRepository {
     }
 
     List<Joke> jokeList = await Future.wait(futureList);
-    // List<Joke> jokeList = [
-    //   Joke(value: "1", id: "1"),
-    //   Joke(value: "2", id: "2"),
-    //   Joke(value: "3", id: "3"),
-    //   Joke(value: "4", id: "4"),
-    //   Joke(value: "5", id: "5")
-    // ];
+
     return jokeList;
   }
 }

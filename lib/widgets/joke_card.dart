@@ -3,19 +3,23 @@ import 'package:flutter/material.dart';
 import '../network/joke_network.dart';
 
 class JokeCard extends StatelessWidget {
-  Joke joke;
-  JokeCard(this.joke);
+  final Joke joke;
+  const JokeCard(this.joke, {super.key});
 
   @override
   Widget build(BuildContext context) {
     return Material(
         child: Card(
-      margin: EdgeInsets.only(left: 16, right: 16, top: 8, bottom: 8),
-      elevation: 4,
+      margin: const EdgeInsets.only(left: 24, right: 24, top: 16, bottom: 16),
+      elevation: 12,
       color: Colors.white,
       child: Container(
-          padding: EdgeInsets.all(32),
-          child: Center(child: Text(joke.value ?? "No more jokes for today"))),
+          padding: const EdgeInsets.all(32),
+          child: Center(
+            child: Text(joke.value ?? "No more jokes for today",
+                style:
+                    const TextStyle(fontSize: 16, fontWeight: FontWeight.w400)),
+          )),
     ));
   }
 }

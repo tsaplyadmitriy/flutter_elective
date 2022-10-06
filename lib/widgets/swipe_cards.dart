@@ -1,17 +1,18 @@
 import 'dart:developer';
+import 'dart:ui';
 
 import 'package:elective/bloc/joke_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:swipe_cards/swipe_cards.dart';
-import 'package:swiping_card_deck/swiping_card_deck.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 import '../network/joke_network.dart';
 
 class JokeCardsWidget extends StatelessWidget {
-  List<Joke> jokeList;
-  JokeBloc bloc;
+  final List<Joke> jokeList;
+  final JokeBloc bloc;
 
-  JokeCardsWidget(this.jokeList, this.bloc);
+  const JokeCardsWidget(this.jokeList, this.bloc, {super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -19,50 +20,68 @@ class JokeCardsWidget extends StatelessWidget {
         .map((joke) => SwipeItem(
             content: joke,
             likeAction: () {
-              bloc.add(JokeNextEvent(joke, Swipe.RIGHT));
+              bloc.add(JokeNextEvent(joke, Swipe.right));
             },
             nopeAction: () {
-              bloc.add(JokeNextEvent(joke, Swipe.LEFT));
+              bloc.add(JokeNextEvent(joke, Swipe.left));
             }))
         .toList();
 
-    var _matchEngine = MatchEngine(swipeItems: items);
+    var matchEngine = MatchEngine(swipeItems: items);
 
     return items.isNotEmpty
         ? Container(
-            margin: EdgeInsets.symmetric(vertical: 128),
+            margin: const EdgeInsets.symmetric(vertical: 128),
             child: SwipeCards(
-                matchEngine: _matchEngine,
+                matchEngine: matchEngine,
                 onStackFinished: () {
                   bloc.add(LoadJokesEvent());
                 },
                 itemBuilder: (context, index) {
-                  return Card(
-                    margin: const EdgeInsets.all(32),
-                    elevation: 8,
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(16.0),
+                  return Column(children: [
+                    Card(
+                      margin: const EdgeInsets.all(32),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(16.0),
+                      ),
+                      child: Container(
+                          height: 300,
+                          padding: const EdgeInsets.all(24),
+                          width: double.infinity,
+                          child: SingleChildScrollView(
+                              child: Column(
+                            children: [
+                              Text(items[index].content.value ?? "No text",
+                                  style: const TextStyle(
+                                      fontWeight: FontWeight.w400,
+                                      fontSize: 20,
+                                      letterSpacing: -1)),
+                            ],
+                          ))),
                     ),
-                    child: Container(
-                        padding: const EdgeInsets.all(16),
-                        width: double.infinity,
-                        height: 450,
-                        child: SingleChildScrollView(
-                            child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                          children: [
-                            Text(items[index].content.value ?? "No text",
-                                style: const TextStyle(
-                                    fontWeight: FontWeight.bold,
-                                    fontSize: 24,
-                                    letterSpacing: -1)),
-                          ],
-                        ))),
-                  );
+                    InkWell(
+                        onTap: () async {
+                          log(items[index].content.url);
+                          String url = items[index].content.url;
+                          log(url.toString());
+
+                          if (await canLaunchUrl(Uri.parse(url))) {
+                            await launchUrl(Uri.parse(url));
+                          } else {
+                            throw "Could not launch $url";
+                          }
+                        },
+                        child: const Text("Click to see more",
+                            style: TextStyle(
+                                color: Colors.blue,
+                                decoration: TextDecoration.underline,
+                                fontWeight: FontWeight.w400,
+                                fontSize: 20,
+                                letterSpacing: -1)))
+                  ]);
                 }))
         : const Center(
-            child: Text('No films to Swipe right now',
+            child: Text('No jokes to Swipe right now',
                 style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20)),
           );
   }

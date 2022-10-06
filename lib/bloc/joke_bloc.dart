@@ -1,22 +1,18 @@
-import 'dart:collection';
 import 'dart:developer';
-import 'package:dio/dio.dart';
 import 'package:elective/network/joke_network.dart';
 import 'package:elective/repository/json_repository.dart';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-enum Swipe { LEFT, RIGHT }
+enum Swipe { left, right }
 
 abstract class JokeEvent {}
 
-abstract class JokeState {
-  List<Joke>? jokeList;
-}
+abstract class JokeState {}
 
 class JokeNextState extends JokeState {
-  List<Joke>? jokeList;
-  JokeNextState({this.jokeList});
+  List<Joke> jokeList;
+  JokeNextState(this.jokeList);
 }
 
 class JokeInitialState extends JokeState {}
@@ -45,7 +41,7 @@ class JokeBloc extends Bloc<JokeEvent, JokeState> {
 
   Future<void> _nextJoke(JokeNextEvent event, Emitter<JokeState> emit) async {
     log(event.swipe.toString());
-    if (event.swipe == Swipe.RIGHT) {
+    if (event.swipe == Swipe.right) {
       favList.add(event.swipedJoke);
     }
   }
@@ -56,6 +52,8 @@ class JokeBloc extends Bloc<JokeEvent, JokeState> {
     List<Joke> jokeList = await jokeRepository!.getJokeList();
     currentJokeList.addAll(jokeList);
 
-    return emit(JokeNextState(jokeList: currentJokeList));
+    JokeNextState nextState = JokeNextState(currentJokeList);
+
+    return emit(nextState);
   }
 }
