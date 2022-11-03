@@ -1,6 +1,5 @@
+import 'package:elective/models/joke.dart';
 import 'package:flutter/material.dart';
-
-import '../network/joke_network.dart';
 
 class JokeCard extends StatelessWidget {
   final Joke joke;

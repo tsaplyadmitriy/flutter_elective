@@ -1,6 +1,7 @@
 import 'dart:developer';
-import 'package:elective/network/joke_network.dart';
-import 'package:elective/repository/json_repository.dart';
+import 'package:elective/models/joke.dart';
+import 'package:elective/repository/joke_repository.dart';
+import 'package:elective/repository/storage_repository.dart';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -31,8 +32,10 @@ class JokeBloc extends Bloc<JokeEvent, JokeState> {
   List<Joke> currentJokeList = [];
   List<Joke> favList = [];
   JokeRepository? jokeRepository;
+  StorageRepository? storageRepository;
   JokeBloc() : super(JokeInitialState()) {
     jokeRepository = JokeRepository();
+    storageRepository = StorageRepository();
     on<JokeNextEvent>(_nextJoke);
     on<LoadJokesEvent>(_loadJokes);
 
@@ -42,7 +45,7 @@ class JokeBloc extends Bloc<JokeEvent, JokeState> {
   Future<void> _nextJoke(JokeNextEvent event, Emitter<JokeState> emit) async {
     log(event.swipe.toString());
     if (event.swipe == Swipe.right) {
-      favList.add(event.swipedJoke);
+      await storageRepository?.storeNewJoke(event.swipedJoke);
     }
   }
 

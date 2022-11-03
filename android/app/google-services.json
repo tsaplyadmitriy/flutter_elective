@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "335038769474",
+    "project_id": "elective-triatlon",
+    "storage_bucket": "elective-triatlon.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:335038769474:android:96164a027696f90c6d00db",
+        "android_client_info": {
+          "package_name": "com.example.elective"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "335038769474-ntb53fvpn4a1i7ie6k5n3ga68ovo38dh.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCeiUcmvDEPabpTNyOrDf0usVXhLivBB7Y"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "335038769474-ntb53fvpn4a1i7ie6k5n3ga68ovo38dh.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

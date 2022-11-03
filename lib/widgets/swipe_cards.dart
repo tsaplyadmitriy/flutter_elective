@@ -1,12 +1,9 @@
 import 'dart:developer';
-import 'dart:ui';
-
 import 'package:elective/bloc/joke_bloc.dart';
+import 'package:elective/models/joke.dart';
 import 'package:flutter/material.dart';
 import 'package:swipe_cards/swipe_cards.dart';
 import 'package:url_launcher/url_launcher.dart';
-
-import '../network/joke_network.dart';
 
 class JokeCardsWidget extends StatelessWidget {
   final List<Joke> jokeList;

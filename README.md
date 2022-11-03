@@ -13,7 +13,7 @@ Joke feed            |  Favourite jokes
 
 ## Usage
 
-- To use this application on your android app, download .apk file via [this link](https://drive.google.com/file/d/1La6smcm-GeYxRr4f3lfHkHpUdBdbFmUg/view?usp=sharing)
+- To use this application on your android app, download .apk file via [this link](https://drive.google.com/file/d/1mGDZ3lBMwvEEFjeBK-v8_0t_XdLIObwS/view?usp=share_link)
 
 - To use this application on your iOS app, you need to have Apple Developer account and access to TestFlight. Build and deploy your app to TestFlight via XCode.
 
@@ -23,6 +23,9 @@ Joke feed            |  Favourite jokes
 - The app has four layers: UI, Business logic, Repository and Network
 - API requests is done using Dio
 - Code generation is done using retrofit
+- Favourite jokes are saved in local storage using Hive
+- Localization is enabled
+- Errors are collected using Crashlytics
 
 Repository is an absraction on data source for business logic module. It simulates pagination, as inital API does not have it. We load jokes with chunks of 20.
 

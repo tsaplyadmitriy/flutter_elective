@@ -1,6 +1,5 @@
-import 'dart:developer';
-
 import 'package:dio/dio.dart';
+import 'package:elective/models/joke.dart';
 import 'package:elective/network/joke_network.dart';
 
 class JokeRepository {

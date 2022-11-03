@@ -17,17 +17,20 @@ class JokeScreen extends StatelessWidget {
         appBar: AppBar(
           actions: [
             Container(
-                margin: const EdgeInsets.only(right: 24),
-                child: InkWell(
+              margin: const EdgeInsets.only(right: 24),
+              child: Row(children: [
+                InkWell(
                   child: const Icon(Icons.star),
                   onTap: () {
                     Navigator.of(context).push(
                       MaterialPageRoute(
-                        builder: (context) => FavouriteScreen(bloc),
+                        builder: (context) => const FavouriteScreen(),
                       ),
                     );
                   },
-                ))
+                ),
+              ]),
+            )
           ],
         ),
         body: SafeArea(
